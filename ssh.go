@@ -85,6 +85,7 @@ func GetSSHBrand(user, password, ipPort string) (string, error) {
  */
 func filterResult(result, firstCmd string) string {
 	//对结果进行处理，截取出指令后的部分
+	alreadyFiltered := false
 	filteredResult := ""
 	resultArray := strings.Split(result, "\n")
 	findCmd := false
@@ -95,7 +96,7 @@ func filterResult(result, firstCmd string) string {
 			filteredResult += resultItem + "\n"
 			continue
 		}
-		if strings.Contains(resultItem, firstCmd) {
+		if !alreadyFiltered && strings.Contains(resultItem, firstCmd) {
 			findCmd = true
 			promptStr = resultItem[0:strings.Index(resultItem, firstCmd)]
 			promptStr = strings.Replace(promptStr, "\r", "", -1)
@@ -103,6 +104,7 @@ func filterResult(result, firstCmd string) string {
 			LogDebug("Find promptStr='%s'", promptStr)
 			//将命令添加到结果中
 			filteredResult += resultItem + "\n"
+			alreadyFiltered = true
 		}
 	}
 	if !findCmd {
