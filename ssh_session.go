@@ -76,6 +76,7 @@ func (this *SSHSession) createConnection(user, password, ipPort string) error {
 		Auth: []ssh.AuthMethod{
 			ssh.Password(password),
 		},
+		HostKeyAlgorithms: []string{ssh.KeyAlgoECDSA256, ssh.KeyAlgoRSA, ssh.KeyAlgoDSA, ssh.KeyAlgoED25519},
 		HostKeyCallback: func(hostname string, remote net.Addr, key ssh.PublicKey) error {
 			return nil
 		},
