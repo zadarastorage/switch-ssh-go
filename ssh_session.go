@@ -86,7 +86,7 @@ func (this *SSHSession) createConnection(user, password, ipPort string) error {
 			},
 			KeyExchanges: []string{
 				"curve25519-sha256", "curve25519-sha256@libssh.org", "ecdh-sha2-nistp256 ecdh-sha2-nistp384",
-				"ecdh-sha2-nistp521 diffie-hellman-group14-sha256", "diffie-hellman-group14-sha1", "ext-info-c",
+				"ecdh-sha2-nistp521", "diffie-hellman-group14-sha256", "diffie-hellman-group14-sha1", "ext-info-c",
 				"diffie-hellman-group1-sha1", "diffie-hellman-group-exchange-sha1",
 			},
 		},
